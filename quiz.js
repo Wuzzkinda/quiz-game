@@ -241,7 +241,7 @@ function finishQuiz() {
   document.getElementById("result-mistakes").textContent =
     `❌ Totaal aantal foutjes: ${mistakes}`;
 
-  fetch("https://backend-production-3c4a.up.railway.app/api/results", {
+  fetch("https://backend-production-3c4a.up.railway.app/api/results?v=3", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -262,6 +262,7 @@ function finishQuiz() {
 })
 .catch(err => console.error("Failed to save results", err));
 }
+
 
 
 
