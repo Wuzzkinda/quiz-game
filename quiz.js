@@ -13,7 +13,7 @@ const submitBtn = document.getElementById("submit-btn");
 const messageDiv = document.getElementById("message");
 const progressBar = document.getElementById("progress-bar");
 
-fetch("data/sample-quiz.json?v=2")
+fetch("data/sample-quiz.json?v=3")
   .then(res => res.json())
   .then(data => { quizData = data; showQuestion(); });
 
@@ -262,6 +262,7 @@ function finishQuiz() {
 })
 .catch(err => console.error("Failed to save results", err));
 }
+
 
 
 
