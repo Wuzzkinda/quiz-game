@@ -5,7 +5,7 @@ let questionStartTime;
 let results = [];
 let selectedAnswer = null;
 let answerLocked = false;
-let mistakes = 0; // tracks number of wrong answers
+let mistakes = 0;
 
 const quizStartTime = Date.now();
 const answerBox = document.getElementById("answer-box");
@@ -259,4 +259,5 @@ function finishQuiz() {
 })
 .catch(err => console.error("Failed to save results", err));
 }
+
 
