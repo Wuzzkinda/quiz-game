@@ -1,0 +1,256 @@
+let answersDiv;
+let currentQuestion = 0;
+let quizData;
+let questionStartTime;
+let results = [];
+let selectedAnswer = null;
+let answerLocked = false;
+let mistakes = 0; // tracks number of wrong answers
+
+const quizStartTime = Date.now();
+const answerBox = document.getElementById("answer-box");
+const submitBtn = document.getElementById("submit-btn");
+const messageDiv = document.getElementById("message");
+const progressBar = document.getElementById("progress-bar");
+
+fetch("data/sample-quiz.json")
+  .then(res => res.json())
+  .then(data => {
+    quizData = data;
+    document.getElementById("quiz-title").textContent = data.title;
+    showQuestion();
+  });
+
+function showQuestion() {
+  const q = quizData.questions[currentQuestion];
+  questionStartTime = Date.now();
+  updateProgress();
+
+  document.getElementById("question").textContent = q.question;
+  messageDiv.textContent = "";
+
+  answersDiv = document.getElementById("answers");
+  answersDiv.innerHTML = "";
+
+  answerBox.textContent = "Sleep of typ hier je antwoord";
+  answerBox.className = "answer-box";
+
+  selectedAnswer = null;
+  answerLocked = false;
+
+  if (q.type === "multiple-choice") renderMultipleChoice(q);
+  if (q.type === "text") renderTextQuestion();
+  if (q.type === "drag-drop") renderDragDrop(q);
+}
+
+/* ---------- RENDERING ---------- */
+
+function renderMultipleChoice(q) {
+  q.options.forEach(opt => {
+    const item = document.createElement("div");
+    item.textContent = opt;
+    item.className = "draggable";
+    item.draggable = true;
+
+    item.ondragstart = e => {
+      e.dataTransfer.setData("text", opt);
+    };
+
+    answersDiv.appendChild(item);
+  });
+
+  setupAnswerBoxDrop();
+}
+
+function renderTextQuestion() {
+  answerBox.contentEditable = true;
+  answerBox.classList.remove("locked");
+
+  if (!answerBox.textContent || answerBox.textContent === "Sleep of typ hier je antwoord") {
+    answerBox.textContent = "";
+  }
+
+  answerBox.focus();
+
+  answerBox.onfocus = () => {
+    if (answerBox.textContent === "Sleep of typ hier je antwoord") {
+      answerBox.textContent = "";
+    }
+  };
+
+  answerBox.onblur = () => {
+    if (answerBox.textContent.trim() === "") {
+      answerBox.textContent = "Sleep of typ hier je antwoord";
+    }
+  };
+}
+
+function renderDragDrop(q) {
+  // Ensure the question text is visible (comes from q.question)
+  // Already set in showQuestion(): document.getElementById("question").textContent = q.question
+
+  // Create draggable options
+  q.options.forEach(opt => {
+    const item = document.createElement("div");
+    item.textContent = opt;
+    item.className = "draggable";
+    item.draggable = true;
+
+    item.ondragstart = e => {
+      e.dataTransfer.setData("text", opt);
+    };
+
+    answersDiv.appendChild(item);
+  });
+
+  // Enable dropping into the answer box
+  setupAnswerBoxDrop();
+}
+
+function setupAnswerBoxDrop() {
+  answerBox.ondragover = e => e.preventDefault();
+  answerBox.ondrop = e => {
+    e.preventDefault();
+    if (answerLocked) return;
+
+    selectedAnswer = e.dataTransfer.getData("text");
+    answerBox.textContent = selectedAnswer;
+  };
+}
+
+/* ---------- ANSWER BOX ---------- */
+
+answerBox.ondragover = e => e.preventDefault();
+
+answerBox.ondrop = e => {
+  e.preventDefault();
+  if (answerLocked) return;
+
+  selectedAnswer = e.dataTransfer.getData("text");
+  answerBox.textContent = selectedAnswer;
+};
+
+/* ---------- SUBMIT ---------- */
+
+submitBtn.onclick = () => {
+  if (answerLocked) return;
+
+  const q = quizData.questions[currentQuestion];
+
+  const answer =
+    q.type === "text"
+      ? answerBox.textContent.trim()
+      : selectedAnswer;
+
+  if (!answer || answer === "Sleep of typ hier je antwoord") {
+  flash("yellow", "Antwoord op de vraag alsjeblieft");
+  return;
+}
+
+  let correct = false;
+
+  if (q.type === "multiple-choice") {
+    correct = answer === q.options[q.correct];
+  } else if (q.type === "drag-drop") {
+    correct = answer === q.correct;
+  } else if (q.type === "text") {
+    correct = answer === q.answer;
+  }
+
+  if (!correct) {
+    mistakes++;
+    flash("red", "Oei, dat is niet juist, probeer opnieuw");
+    return;
+  }
+
+  // Correct answer
+  answerLocked = true;
+  answerBox.classList.add("locked");
+  flash("green", "Correct!");
+
+  const timeSpent = Date.now() - questionStartTime;
+  results.push({
+    questionId: q.id,
+    timeSpent,
+    correct: true
+  });
+
+  setTimeout(() => {
+    nextQuestion();
+  }, 800);
+};
+
+/* ---------- HELPERS ---------- */
+
+function saveResult() {
+  const q = quizData.questions[currentQuestion];
+  results.push({
+    questionId: q.id,
+    timeSpent: Date.now() - questionStartTime,
+    correct: true
+  });
+}
+
+function nextQuestion() {
+  currentQuestion++;
+
+  if (currentQuestion < quizData.questions.length) {
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function resetAnswerBox() {
+  selectedAnswer = null;
+  answerLocked = false;
+  answerBox.textContent = "Sleep of typ hier je antwoord";
+  answerBox.className = "answer-box";
+  answerBox.contentEditable = false;
+}
+
+function flash(color, text) {
+  answerBox.classList.remove("yellow", "red", "green");
+  answerBox.classList.add(color);
+  messageDiv.textContent = text;
+
+  setTimeout(() => {
+    answerBox.classList.remove(color);
+    messageDiv.textContent = "";
+  }, 800);
+}
+
+function lockAnswer() {
+  answerLocked = true;
+  answerBox.classList.add("locked");
+}
+
+function updateProgress() {
+  const total = quizData.questions.length;
+  const percent = (currentQuestion / total) * 100;
+  progressBar.style.width = percent + "%";
+}
+
+function finishQuiz() {
+  progressBar.style.width = "100%";
+
+  const totalTimeMs = Date.now() - quizStartTime;
+  const totalSeconds = Math.floor(totalTimeMs / 1000);
+
+  document.getElementById("quiz-container").style.display = "none";
+
+  document.getElementById("result-container").style.display = "block";
+  document.getElementById("result-time").textContent =
+    `⏱ Totale tijd: ${totalSeconds} seconden`;
+  document.getElementById("result-mistakes").textContent =
+    `❌ Totaal aantal foutjes: ${mistakes}`;
+
+  fetch("https://backend-production-055a.up.railway.app", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      totalTime: totalTimeMs,
+      results
+    })
+  }).catch(err => console.error("Failed to save results", err));
+}
