@@ -241,20 +241,28 @@ function finishQuiz() {
   document.getElementById("result-mistakes").textContent =
     `❌ Totaal aantal foutjes: ${mistakes}`;
 
-  fetch("backend-production-3c4a.up.railway.app/api/results", {
+  fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json"
+  },
   body: JSON.stringify({
     totalTime: totalTimeMs,
     results
   })
 })
 .then(res => {
-  if (!res.ok) throw new Error("Network response was not ok");
+  if (!res.ok) {
+    throw new Error(`Server returned ${res.status}`);
+  }
+  return res.json();
+})
+.then(() => {
   console.log("Results saved successfully!");
 })
 .catch(err => console.error("Failed to save results", err));
 }
+
 
 
 
