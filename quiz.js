@@ -5,7 +5,7 @@ let questionStartTime;
 let results = [];
 let selectedAnswer = null;
 let answerLocked = false;
-let mistakes = 0;
+let mistakes = 0; // tracks number of wrong answers
 
 const quizStartTime = Date.now();
 const answerBox = document.getElementById("answer-box");
@@ -164,6 +164,8 @@ submitBtn.onclick = () => {
   answerBox.classList.add("locked");
   flash("green", "Correct!");
 
+  flyStar();
+
   const timeSpent = Date.now() - questionStartTime;
   results.push({
     questionId: q.id,
@@ -232,6 +234,8 @@ function finishQuiz() {
 
   const totalTimeMs = Date.now() - quizStartTime;
   const totalSeconds = Math.floor(totalTimeMs / 1000);
+  const totalStars = document.getElementById("star-bucket").children.length;
+
 
   document.getElementById("quiz-container").style.display = "none";
 
@@ -240,32 +244,74 @@ function finishQuiz() {
     `⏱ Totale tijd: ${totalSeconds} seconden`;
   document.getElementById("result-mistakes").textContent =
     `❌ Totaal aantal foutjes: ${mistakes}`;
+  document.getElementById("result-stars").textContent = `⭐ Je hebt ${totalStars} sterren verdiend!`;
 
-  fetch("https://backend-production-3c4a.up.railway.app/api/results?v=3", {
+
+  fetch("backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     totalTime: totalTimeMs,
     results
   })
 })
 .then(res => {
-  if (!res.ok) {
-    throw new Error(`Server returned ${res.status}`);
-  }
-  return res.json();
-})
-.then(() => {
+  if (!res.ok) throw new Error("Network response was not ok");
   console.log("Results saved successfully!");
 })
 .catch(err => console.error("Failed to save results", err));
 }
 
+function addStar() {
+  const bucket = document.getElementById("star-bucket");
+  const star = document.createElement("div");
+  star.classList.add("star");
+  bucket.appendChild(star);
+}
 
+function flyStar() {
+  const bucket = document.getElementById("star-bucket");
+  const bucketRect = bucket.getBoundingClientRect();
+  const answerBoxRect = answerBox.getBoundingClientRect();
 
+  // Create flying star
+  const star = document.createElement("div");
+  star.classList.add("star");
+  document.body.appendChild(star);
 
+  // Start at answer box position
+  const startX = answerBoxRect.left + answerBoxRect.width / 2 - 15;
+  const startY = answerBoxRect.top + answerBoxRect.height / 2 - 15;
+  star.style.left = startX + "px";
+  star.style.top = startY + "px";
 
+  // Calculate end position (bucket center)
+  const endX = bucketRect.left + bucketRect.width / 2 - 15;
+  const endY = bucketRect.top + bucketRect.height / 2 - 15;
 
+  // Randomize arc height for natural bounce
+  const arcHeight = Math.random() * -150 - 100; // negative = goes up
 
+  // Animate star along a bouncing path
+  const animation = star.animate(
+    [
+      { transform: `translate(0, 0) rotate(0deg)` },
+      { transform: `translate(${(endX - startX)/2}px, ${arcHeight}px) rotate(360deg)` },
+      { transform: `translate(${endX - startX}px, ${endY - startY}px) rotate(720deg)` }
+    ],
+    {
+      duration: 1000,
+      easing: "ease-in-out",
+    }
+  );
+
+  animation.onfinish = () => {
+    star.remove();
+
+    // Add permanent star in the bucket
+    const permanentStar = document.createElement("div");
+    permanentStar.classList.add("star");
+    permanentStar.style.position = "static";
+    bucket.appendChild(permanentStar);
+  };
+}
