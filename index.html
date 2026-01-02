@@ -1,41 +1,46 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Quiz Game</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
+<body>
 
-        <h1 id="quiz-title">Quiz</h1>
+  <h1 id="quiz-title">Quiz</h1>
 
-        <div id="quiz-container">
+  <div id="quiz-container">
 
-            <div id="progress-container">
-            <div id="progress-bar"></div>
-            </div>
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
 
-            <p id="question"></p>
-            <div id="answer-box" class="answer-box">Drop or type your answer here</div>
-            </div>
+    <p id="question"></p>
 
-            <button id="submit-btn">Check</button>
-            <div id="message"></div>
-            <div id="answers"></div>
-        </div>
+    <div id="answer-box" class="answer-box">
+      Sleep of typ hier je antwoord
+    </div>
 
-        <div id="star-bucket-container">
-            <div id="star-bucket"></div>
-        </div>
+    <button id="submit-btn">Submit</button>
 
-        <div id="result-container" style="display: none;">
-        <h2>🎉 Geweldig gedaan!</h2>
-        <p id="result-time"></p>
-        <p id="result-mistakes"></p>
-        <p id="result-stars"></p>
-        </div>
+    <div id="message"></div>
+    <div id="answers"></div>
+  </div>
 
-        <script src="quiz.js"></script>
-    </body>
+  <!-- HUD bucket (never affects layout) -->
+  <div id="star-bucket-container">
+    <div id="star-counter">0</div>
+    <div id="star-bucket"></div>
+  </div>
+
+  <div id="result-container">
+    <h2>🎉 Geweldig gedaan!</h2>
+    <p id="result-time"></p>
+    <p id="result-mistakes"></p>
+    <p id="result-stars"></p>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
 </html>
