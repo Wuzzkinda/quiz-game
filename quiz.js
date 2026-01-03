@@ -205,6 +205,12 @@ function finishQuiz() {
   document.getElementById("result-stars").textContent =
     `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
+console.log("🚀 PAYLOAD", JSON.stringify({
+  totalTime: totalTimeMs,
+  results
+  
+}, null, 2));
+
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
   headers: {
