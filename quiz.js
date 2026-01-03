@@ -207,9 +207,20 @@ function finishQuiz() {
 
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ totalTimeMs, results })
-});
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    totalTime: Number(totalTimeMs),
+    results: results || []
+  })
+})
+.then(res => {
+  if (!res.ok) throw new Error("Bad response");
+  return res.json();
+})
+.then(data => console.log("Saved:", data))
+.catch(err => console.error("Save failed:", err));
 }
 
 /* ---------- STARS ---------- */
