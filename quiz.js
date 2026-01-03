@@ -208,7 +208,7 @@ function finishQuiz() {
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ totalTime, results })
+  body: JSON.stringify({ totalTimeMs, results })
 });
 }
 
