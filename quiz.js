@@ -157,7 +157,6 @@ function saveResult() {
   });
 }
 
-  setTimeout(nextQuestion, 800);
 
 /* ---------- FLOW ---------- */
 
