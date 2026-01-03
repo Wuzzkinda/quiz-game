@@ -64,7 +64,23 @@ function renderMultipleChoice(q) {
 
 function renderTextQuestion() {
   answerBox.contentEditable = true;
+  answerBox.classList.remove("locked");
+
+  if (!answerBox.textContent || answerBox.textContent === "Sleep of typ hier je antwoord") {
+    answerBox.textContent = "";
+  }
+
   answerBox.focus();
+  answerBox.onfocus = () => {
+    if (answerBox.textContent === "Sleep of typ hier je antwoord") {
+      answerBox.textContent = "";
+    }
+  };
+  answerBox.onblur = () => {
+    if (answerBox.textContent.trim() === "") {
+      answerBox.textContent = "Sleep of typ hier je antwoord";
+    }
+  };
 }
 
 function renderDragDrop(q) {
@@ -130,6 +146,19 @@ submitBtn.onclick = () => {
   setTimeout(nextQuestion, 800);
 };
 
+/* ---------- HELPERS ---------- */
+
+function saveResult() {
+  const q = quizData.questions[currentQuestion];
+  results.push({
+    questionId: q.id,
+    timeSpent: Date.now() - questionStartTime,
+    correct: true
+  });
+}
+
+  setTimeout(nextQuestion, 800);
+
 /* ---------- FLOW ---------- */
 
 function nextQuestion() {
@@ -175,7 +204,7 @@ function finishQuiz() {
   document.getElementById("result-mistakes").textContent =
     `❌ Totaal aantal foutjes: ${mistakes}`;
   document.getElementById("result-stars").textContent =
-    `⭐ Je hebt ${starCount} sterren verdiend!`;
+    `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
   fetch("backend-production-3c4a.up.railway.app/api/results", {
     method: "POST",
