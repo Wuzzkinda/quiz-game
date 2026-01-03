@@ -205,7 +205,7 @@ function finishQuiz() {
   document.getElementById("result-stars").textContent =
     `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
-  fetch("backend-production-3c4a.up.railway.app/api/results", {
+  fetch("https://backend-production-3c4a.up.railway.app/api/results", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ totalTime: totalTimeMs, results })
