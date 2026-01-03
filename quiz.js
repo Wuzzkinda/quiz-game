@@ -206,10 +206,10 @@ function finishQuiz() {
     `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ totalTime: totalTimeMs, results })
-  }).catch(console.error);
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ totalTime, results })
+});
 }
 
 /* ---------- STARS ---------- */
