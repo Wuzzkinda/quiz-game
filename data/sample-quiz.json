@@ -1,12 +1,13 @@
 {
-  "title": "Reken Quiz",
+  "title": "De Reken Challenge",
   "questions": [
     {
       "id": 1,
       "type": "multiple-choice",
       "question": "5 + 3 = ?",
       "options": ["7", "8", "9", "6"],
-      "correct": 1
+      "correct": 1,
+      "info": "Tip: "
     },
     {
       "id": 2,

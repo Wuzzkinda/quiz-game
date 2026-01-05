@@ -13,6 +13,8 @@ const answerBox = document.getElementById("answer-box");
 const submitBtn = document.getElementById("submit-btn");
 const messageDiv = document.getElementById("message");
 const progressBar = document.getElementById("progress-bar");
+const characterLeft = document.getElementById("character-left");
+const infoBubble = document.getElementById("info-bubble");
 
 /* ---------- LOAD QUIZ ---------- */
 
@@ -46,6 +48,12 @@ function showQuestion() {
   if (q.type === "multiple-choice") renderMultipleChoice(q);
   if (q.type === "text") renderTextQuestion();
   if (q.type === "drag-drop") renderDragDrop(q);
+
+  if (q.info) {
+  infoBubble.textContent = q.info;
+} else {
+  infoBubble.textContent = "";
+}
 }
 
 /* ---------- RENDERING ---------- */
@@ -304,3 +312,19 @@ function updateStarCounter() {
 
   counter.textContent = `⭐ ${starCount}`;
 }
+
+// Show info on hover or click
+characterLeft.addEventListener("mouseenter", () => {
+  if (infoBubble.textContent.trim() !== "") {
+    infoBubble.classList.add("visible");
+  }
+});
+
+characterLeft.addEventListener("mouseleave", () => {
+  infoBubble.classList.remove("visible");
+});
+
+// Mobile support (tap)
+characterLeft.addEventListener("click", () => {
+  infoBubble.classList.toggle("visible");
+});
