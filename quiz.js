@@ -4,7 +4,8 @@ let answersDiv;
 let currentLevel = 0;
 let currentQuestion = 0;
 let quizData;
-let questionStartTime;
+let questionStartTime = Date.now();
+let levelStartTime = Date.now();
 let results = [];
 let selectedAnswer = null;
 let answerLocked = false;
@@ -160,10 +161,10 @@ submitBtn.onclick = () => {
   flyStar();
 
   results.push({
-    level: currentLevel,
-    questionId: q.id,
-    timeSpent: Date.now() - questionStartTime,
-    correct: true
+  level: currentLevel,
+  questionId: q.id,
+  timeSpent: Date.now() - questionStartTime,
+  correct: false
   });
 
   setTimeout(nextQuestion, 800);
@@ -236,7 +237,7 @@ function showLevelResults() {
   document.getElementById("result-container").style.display = "block";
 
   document.getElementById("result-time").textContent =
-    `⏱ Tijd in level: ${Math.floor((Date.now() - quizStartTime) / 1000)}s`;
+    `⏱ Tijd in level: ${Math.floor((Date.now() - levelStartTime) / 1000)}s`;
 
   document.getElementById("result-stars").textContent =
     `⭐ Sterren: ${starCount}`;
@@ -244,14 +245,15 @@ function showLevelResults() {
   const btn = document.createElement("button");
   btn.textContent = "➡️ Volgende level";
   btn.onclick = startNextLevel;
-  document.getElementById("result-container").appendChild(btn);
+  document.querySelectorAll("#result-container button").forEach(b => b.remove());
+  
 }
 
 function addContinueButton() {
   const btn = document.createElement("button");
   btn.textContent = "➡️ Volgende level";
   btn.onclick = startNextLevel;
-  document.getElementById("result-container").appendChild(btn);
+  document.querySelectorAll("#result-container button").forEach(b => b.remove());
 }
 
 function finishQuiz() {
@@ -275,21 +277,6 @@ console.log("🚀 PAYLOAD", JSON.stringify({
   results
   
 }, null, 2));
-
-function startNextLevel() {
-  currentLevel++;
-  currentQuestion = 0;
-  starCount = 0;
-
-  if (currentLevel < quizData.levels.length) {
-    document.getElementById("result-container").style.display = "none";
-    document.getElementById("quiz-container").style.display = "block";
-    showQuestion();
-  } else {
-    showFinalResults();
-  }
-}
-
 
   //Don't f*cking touch this
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
@@ -386,17 +373,17 @@ function updateStarCounter() {
 }
 
 
-character.left.container("mouseenter", () => {
+haracters.left.container.addEventListener("mouseenter", () => {
   if (infoBubble.textContent.trim() !== "") {
     infoBubble.classList.add("visible");
   }
 });
 
-character.left.container("mouseleave", () => {
+characters.left.container.addEventListener("mouseleave", () => {
   infoBubble.classList.remove("visible");
 });
 
-character.left.container("click", () => {
+characters.left.container.addEventListener("click", () => {
   infoBubble.classList.toggle("visible");
 });
 

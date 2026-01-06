@@ -112,7 +112,10 @@
   "title":"De Reken Challenge - Deel 2",
   "questions":[
   {
-
+    "id": 1,
+    "type": "text",
+    "question": "Typ 2 + 2",
+    "answer": "4"
   }
 ]
 }
