@@ -38,6 +38,17 @@ const characters = {
   }
 };
 
+const characterPoses = {
+  left: {
+    idle: "images/left/idle.png",
+    celebrate: "images/left/pose1.png"
+  },
+  right: {
+    idle: "images/right/idle.png",
+    taunt: "images/right/pose3.png"
+  }
+};
+
 /* ---------- LOAD QUIZ ---------- */
 
 fetch("data/sample-quiz.json?v=3")
@@ -385,18 +396,32 @@ characters.right.img.addEventListener("mouseleave", () => {
 
 function celebrateLeftCharacter() {
   const char = document.getElementById("character-left");
+  const img = char.querySelector("img");
+
+  // Switch pose
+  img.src = characterPoses.left.celebrate;
+
+  // Animate
   char.classList.add("celebrate");
 
   setTimeout(() => {
     char.classList.remove("celebrate");
+    img.src = characterPoses.left.idle;
   }, 600);
 }
 
 function tauntRightCharacter() {
   const char = document.getElementById("character-right");
+  const img = char.querySelector("img");
+
+  // Switch pose
+  img.src = characterPoses.right.taunt;
+
+  // Animate
   char.classList.add("taunt");
 
   setTimeout(() => {
     char.classList.remove("taunt");
+    img.src = characterPoses.right.idle;
   }, 600);
 }
