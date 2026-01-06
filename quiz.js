@@ -15,6 +15,28 @@ const messageDiv = document.getElementById("message");
 const progressBar = document.getElementById("progress-bar");
 const characterLeft = document.getElementById("character-left");
 const infoBubble = document.getElementById("info-bubble");
+const characters = {
+  left: {
+    img: document.getElementById("char-left-img"),
+    poses: [
+      "images/characterA/idle.png",
+      "images/characterA/pose1.png",
+      "images/characterA/pose2.png",
+      "images/characterA/pose3.png"
+    ],
+    idle: "images/characterA/idle.png"
+  },
+  right: {
+    img: document.getElementById("char-right-img"),
+    poses: [
+      "images/characterB/idle.png",
+      "images/characterB/pose1.png",
+      "images/characterB/pose2.png",
+      "images/characterB/pose3.png"
+    ],
+    idle: "images/characterB/idle.png"
+  }
+};
 
 /* ---------- LOAD QUIZ ---------- */
 
@@ -29,9 +51,11 @@ fetch("data/sample-quiz.json?v=3")
 
 function showQuestion() {
   const q = quizData.questions[currentQuestion];
+  const infoBubble = document.getElementById("info-bubble");
   questionStartTime = Date.now();
   updateProgress();
 
+  infoBubble.textContent = q.info || "No hint available.";
   document.getElementById("question").textContent = q.question;
   messageDiv.textContent = "";
 
@@ -327,4 +351,32 @@ characterLeft.addEventListener("mouseleave", () => {
 // Mobile support (tap)
 characterLeft.addEventListener("click", () => {
   infoBubble.classList.toggle("visible");
+});
+
+function randomPose(character) {
+  const poses = character.poses;
+  const randomIndex = Math.floor(Math.random() * poses.length);
+  character.img.src = poses[randomIndex];
+}
+
+function resetPose(character) {
+  character.img.src = character.idle;
+}
+
+// LEFT CHARACTER
+characters.left.img.addEventListener("mouseenter", () => {
+  randomPose(characters.left);
+});
+
+characters.left.img.addEventListener("mouseleave", () => {
+  resetPose(characters.left);
+});
+
+// RIGHT CHARACTER
+characters.right.img.addEventListener("mouseenter", () => {
+  randomPose(characters.right);
+});
+
+characters.right.img.addEventListener("mouseleave", () => {
+  resetPose(characters.right);
 });
