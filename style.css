@@ -199,8 +199,8 @@ button {
 #characters-container {
   position: fixed;
   bottom: 20px;
-  left: 120px;
-  right: 120px;
+  left: 150px;
+  right: 150px;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
