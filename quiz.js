@@ -40,12 +40,12 @@ const characters = {
 
 const characterPoses = {
   left: {
-    idle: "images/left/idle.png",
-    celebrate: "images/left/pose1.png"
+    idle: "images/characterA/idle.png",
+    celebrate: "images/characterA/pose1.png"
   },
   right: {
-    idle: "images/right/idle.png",
-    taunt: "images/right/pose3.png"
+    idle: "images/characterB/idle.png",
+    taunt: "images/characterB/pose3.png"
   }
 };
 
