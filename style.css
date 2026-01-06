@@ -212,7 +212,7 @@ button {
 }
 
 .character img {
-  width: 130px;
+  width: 150px;
   cursor: pointer;
   user-select: none;
 }
