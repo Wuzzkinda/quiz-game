@@ -199,8 +199,8 @@ button {
 #characters-container {
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  right: 20px;
+  left: 120px;
+  right: 120px;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
@@ -215,6 +215,23 @@ button {
   width: 130px;
   cursor: pointer;
   user-select: none;
+}
+
+@keyframes wiggle {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-6deg); }
+  40%  { transform: rotate(6deg); }
+  60%  { transform: rotate(-6deg); }
+  80%  { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.character.celebrate img {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+.character.taunt img {
+  animation: wiggle 0.6s ease-in-out;
 }
 
 /* ---------- INFO SYSTEM ---------- */
@@ -263,3 +280,4 @@ button {
   opacity: 1;
   transform: translateY(0);
 }
+

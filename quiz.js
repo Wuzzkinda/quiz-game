@@ -158,15 +158,17 @@ submitBtn.onclick = () => {
   else if (q.type === "text") correct = answer === q.answer;
 
   if (!correct) {
-    mistakes++;
-    flash("red", "Oei, dat is niet juist, probeer opnieuw");
-    return;
+  mistakes++;
+  flash("red", "Oei, dat is niet juist, probeer opnieuw");
+  tauntRightCharacter();
+  return;
   }
 
   // Correct
   answerLocked = true;
   answerBox.classList.add("locked");
   flash("green", "Correct!");
+  celebrateLeftCharacter();
   flyStar();
 
   results.push({
@@ -380,3 +382,21 @@ characters.right.img.addEventListener("mouseenter", () => {
 characters.right.img.addEventListener("mouseleave", () => {
   resetPose(characters.right);
 });
+
+function celebrateLeftCharacter() {
+  const char = document.getElementById("character-left");
+  char.classList.add("celebrate");
+
+  setTimeout(() => {
+    char.classList.remove("celebrate");
+  }, 600);
+}
+
+function tauntRightCharacter() {
+  const char = document.getElementById("character-right");
+  char.classList.add("taunt");
+
+  setTimeout(() => {
+    char.classList.remove("taunt");
+  }, 600);
+}
