@@ -19,6 +19,8 @@ const submitBtn = document.getElementById("submit-btn");
 const messageDiv = document.getElementById("message");
 const progressBar = document.getElementById("progress-bar");
 const infoBubble = document.getElementById("info-bubble");
+const nextLevelBtn = document.getElementById("next-level-btn");
+nextLevelBtn.onclick = startNextLevel;
 
 /* ---------- CHARACTERS ---------- */
 
@@ -198,11 +200,13 @@ function nextQuestion() {
 function startNextLevel() {
   currentLevel++;
   currentQuestion = 0;
+  levelStartTime = Date.now();
 
-  document.getElementById("result-container").style.display = "none";
-  document.getElementById("quiz-container").style.display = "block";
+  nextLevelBtn.style.display = "none";
 
   if (currentLevel < quizData.levels.length) {
+    document.getElementById("result-container").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
     showQuestion();
   } else {
     finishQuiz();
@@ -242,18 +246,12 @@ function showLevelResults() {
   document.getElementById("result-stars").textContent =
     `⭐ Sterren: ${starCount+1}`;
 
-  const btn = document.createElement("button");
-  btn.textContent = "➡️ Volgende level";
-  btn.onclick = startNextLevel;
+sendResults("level-complete");
+
+  nextLevelBtn.style.display = "inline-block";
+  
   document.querySelectorAll("#result-container button").forEach(b => b.remove());
   
-}
-
-function addContinueButton() {
-  const btn = document.createElement("button");
-  btn.textContent = "➡️ Volgende level";
-  btn.onclick = startNextLevel;
-  document.querySelectorAll("#result-container button").forEach(b => b.remove());
 }
 
 function finishQuiz() {
@@ -272,30 +270,13 @@ function finishQuiz() {
   document.getElementById("result-stars").textContent =
     `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
+sendResults("quiz-complete");
+
 console.log("🚀 PAYLOAD", JSON.stringify({
   totalTime: totalTimeMs,
   results
   
-}, null, 2));
-
-  //Don't f*cking touch this
-  fetch("https://backend-production-3c4a.up.railway.app/api/results", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    totalTime: Number(totalTimeMs),
-    results: results || []
-  })
-})
-.then(res => {
-  if (!res.ok) throw new Error("Bad response");
-  return res.json();
-})
-.then(data => console.log("Saved:", data))
-.catch(err => console.error("Save failed:", err));
-}
+}, null, 2));}
 
 /* ---------- STARS ---------- */
 
@@ -419,4 +400,27 @@ function tauntRightCharacter() {
     c.container.classList.remove("taunt");
     c.img.src = c.idle;
   }, 600);
+}
+
+/* ---------- DATA SENDING ---------- */
+
+function sendResults(reason = "level-complete"){
+  const payload = {
+    reason,
+    level: currentLevel,
+    totalTime: Date.now() - quizStartTime,
+    results
+  };
+  //Don't f*cking touch this
+  fetch("https://backend-production-3c4a.up.railway.app/api/results", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload)
+})
+.then(res => {
+  if (!res.ok) throw new Error("Bad response");
+  return res.json();
+})
+.then(data => console.log("Saved:", data))
+.catch(err => console.error("Save failed:", err));
 }
