@@ -240,7 +240,7 @@ function showLevelResults() {
     `⏱ Tijd in level: ${Math.floor((Date.now() - levelStartTime) / 1000)}s`;
 
   document.getElementById("result-stars").textContent =
-    `⭐ Sterren: ${starCount}`;
+    `⭐ Sterren: ${starCount+1}`;
 
   const btn = document.createElement("button");
   btn.textContent = "➡️ Volgende level";
@@ -373,7 +373,7 @@ function updateStarCounter() {
 }
 
 
-haracters.left.container.addEventListener("mouseenter", () => {
+characters.left.container.addEventListener("mouseenter", () => {
   if (infoBubble.textContent.trim() !== "") {
     infoBubble.classList.add("visible");
   }
