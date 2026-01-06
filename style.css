@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
 
-  background-image: url("images/backgrounds/main.jpg");
+  background-image: url("images/backgrounds/main.png");
   background-size: cover;        /* fill screen */
   background-position: center;   /* center image */
   background-repeat: no-repeat;
