@@ -290,6 +290,8 @@ function startNextLevel() {
   }
 }
 
+
+  //Don't f*cking touch this
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
   headers: {
@@ -351,7 +353,6 @@ function addStarToBucket() {
 
   const bucket = document.getElementById("star-bucket");
 
-  // Expand bucket after 3 stars
   if (starCount >= 4) {
     bucket.classList.add("expanded");
   }
@@ -384,8 +385,6 @@ function updateStarCounter() {
   counter.textContent = `⭐ ${starCount}`;
 }
 
-// Show info on hover or click
-
 
 character.left.container("mouseenter", () => {
   if (infoBubble.textContent.trim() !== "") {
@@ -397,7 +396,6 @@ character.left.container("mouseleave", () => {
   infoBubble.classList.remove("visible");
 });
 
-// Mobile support (tap)
 character.left.container("click", () => {
   infoBubble.classList.toggle("visible");
 });
