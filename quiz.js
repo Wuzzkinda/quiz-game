@@ -168,7 +168,7 @@ submitBtn.onclick = () => {
   level: currentLevel,
   questionId: q.id,
   timeSpent: Date.now() - questionStartTime,
-  correct: false
+  correct: true
   });
 
   setTimeout(nextQuestion, 800);
@@ -240,6 +240,7 @@ function updateProgress() {
 
 function showLevelResults() {
   sendResults("level-complete");
+
   document.getElementById("quiz-container").style.display = "none";
   document.getElementById("result-container").style.display = "block";
 
@@ -250,9 +251,9 @@ function showLevelResults() {
     `⭐ Sterren: ${starCount+1}`;
 
   nextLevelBtn.style.display = "inline-block";
-  
-  document.querySelectorAll("#result-container button").forEach(b => b.remove());
-  
+
+  results = [];
+  levelStartTime = Date.now();
 }
 
 function finishQuiz() {
