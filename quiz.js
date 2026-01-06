@@ -4,13 +4,15 @@ let answersDiv;
 let currentLevel = 0;
 let currentQuestion = 0;
 let quizData;
-let questionStartTime = Date.now();
-let levelStartTime = Date.now();
+let questionStartTime;
 let results = [];
 let selectedAnswer = null;
 let answerLocked = false;
 let mistakes = 0;
 let starCount = 0;
+
+let levelStartTime = Date.now();
+let quizStartTime = Date.now();
 
 /* ---------- CONST ---------- */
 
@@ -237,6 +239,7 @@ function updateProgress() {
 /* ---------- RESULTS ---------- */
 
 function showLevelResults() {
+  sendResults("level-complete");
   document.getElementById("quiz-container").style.display = "none";
   document.getElementById("result-container").style.display = "block";
 
@@ -246,8 +249,6 @@ function showLevelResults() {
   document.getElementById("result-stars").textContent =
     `⭐ Sterren: ${starCount+1}`;
 
-sendResults("level-complete");
-
   nextLevelBtn.style.display = "inline-block";
   
   document.querySelectorAll("#result-container button").forEach(b => b.remove());
@@ -256,6 +257,8 @@ sendResults("level-complete");
 
 function finishQuiz() {
   progressBar.style.width = "100%";
+
+  sendResults("quiz-complete");
 
   const totalTimeMs = Date.now() - quizStartTime;
   const totalSeconds = Math.floor(totalTimeMs / 1000);
@@ -270,13 +273,8 @@ function finishQuiz() {
   document.getElementById("result-stars").textContent =
     `⭐ Je hebt ${starCount+1} sterren verdiend!`;
 
-sendResults("quiz-complete");
 
-console.log("🚀 PAYLOAD", JSON.stringify({
-  totalTime: totalTimeMs,
-  results
-  
-}, null, 2));}
+}
 
 /* ---------- STARS ---------- */
 
@@ -411,6 +409,9 @@ function sendResults(reason = "level-complete"){
     totalTime: Date.now() - quizStartTime,
     results
   };
+
+  console.log("🚀 PAYLOAD", payload);
+
   //Don't f*cking touch this
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
