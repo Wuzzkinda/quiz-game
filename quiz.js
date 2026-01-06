@@ -55,7 +55,7 @@ const characters = {
 
 /* ---------- LOAD QUIZ ---------- */
 
-fetch("data/sample-quiz.json?v=4")
+fetch("data/sample-quiz.json?v=5")
   .then(res => res.json())
   .then(data => {
     quizData = data;

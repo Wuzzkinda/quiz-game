@@ -7,103 +7,310 @@
   {
       "id": 1,
       "type": "multiple-choice",
-      "question": "5 + 3 = ?",
-      "options": ["7", "8", "9", "6"],
-      "correct": 1,
-      "info": "Tip: "
+      "question": "1000 x 9 = ?",
+      "options": ["8500", "8900", "10000", "9000"],
+      "correct": 3,
+      "info": "9 keer 1000, hoeveel is dat?"
     },
     {
       "id": 2,
       "type": "text",
-      "question": "Typ het resultaat van 12 − 5",
-      "answer": "7"
+      "question": "50 x 60 = ?",
+      "answer": "3000",
+      "info": "Doe eens 5 keer 6, en voeg er wat nullen bij!"
     },
     {
       "id": 3,
       "type": "drag-drop",
-      "question": "Wat is 18 gedeeld door 3?",
-      "options": ["4", "6", "8"],
-      "correct": "6"
+      "question": "0 x 1000 = ?",
+      "options": ["500", "0", "1000"],
+      "correct": "0",
+      "info" : "Als je iets maal 0 doet, gebeurd er altijd iets interessant, 0 neemt altijd alles mee bij vermenigvuldigheden!"
     },
     {
       "id": 4,
       "type": "multiple-choice",
-      "question": "Welk getal is een priemgetal?",
-      "options": ["4", "6", "7", "9"],
-      "correct": 2
+      "question": "10 x 953 = ?",
+      "options": ["9500", "10953", "9530", "19060"],
+      "correct": 3,
+      "info": "Dit is een makkie, wat moet je toevoegen bij de 953?"
     },
     {
       "id": 5,
       "type": "text",
-      "question": "Typ het resultaat van 9 × 3",
-      "answer": "27"
+      "question": "5 x 300 = ?",
+      "answer": "1500",
+      "info": "Doe eens 5 keer 3 en voeg er wat nullen bij!"
     },
     {
       "id": 6,
       "type": "drag-drop",
-      "question": "Sleep het grootste getal naar het vak",
-      "options": ["12", "20", "7"],
-      "correct": "20"
+      "question": "4 x 900 = ?",
+      "options": ["5000", "4500", "3600"],
+      "correct": "3600",
+      "info": "Doe eens 4 x 9 en voeg er wat nullen bij!"
     },
     {
       "id": 7,
       "type": "multiple-choice",
-      "question": "Wat is 15 ÷ 5?",
-      "options": ["2", "3", "4", "5"],
-      "correct": 1
+      "question": "56 x 100 = ?",
+      "options": ["560", "5600", "56000", "100"],
+      "correct": 1,
+      "info": "Dit is een makkie, wat moet je toevoegen bij de 56?"
     },
     {
       "id": 8,
       "type": "text",
-      "question": "Typ het kwadraat van 6",
-      "answer": "36"
+      "question": "60 x 8 = ?",
+      "answer": "480",
+      "info": "Als je 6 x 8 doen, wat kom je dan uit?"
     },
     {
       "id": 9,
       "type": "drag-drop",
-      "question": "Sleep het even getal naar het vak",
-      "options": ["5", "9", "8"],
-      "correct": "8"
+      "question": "300 x 0 = ?",
+      "options": ["0", "30", "300"],
+      "correct": "0",
+      "info": "Als je iets maal 0 doet, gebeurd er altijd iets interessant, 0 neemt altijd alles mee bij vermenigvuldigheden!"
     },
     {
       "id": 10,
       "type": "multiple-choice",
-      "question": "Wat is 7 × 2?",
-      "options": ["12", "14", "16", "10"],
-      "correct": 1
+      "question": "10 x 340 = ?",
+      "options": ["3300", "3800", "10", "3400"],
+      "correct": 3,
+      "info": "Wat zou je toevoegen bij de 340?"
     },
     {
       "id": 11,
       "type": "text",
-      "question": "Typ het volgende getal in de reeks: 2, 4, 6, ?",
-      "answer": "8"
+      "question": "85 x ? = 8500",
+      "answer": "100",
+      "info": "Welk getal moet je vermenigvuldigen bij 85 om tot 8500 te komen?"
     },
     {
       "id": 12,
       "type": "drag-drop",
-      "question": "Sleep het kleinste getal naar het vak",
-      "options": ["11", "3", "7"],
-      "correct": "3"
+      "question": "? x 50 = 2000",
+      "options": ["20", "25", "40"],
+      "correct": "40",
+      "info": "Welk getal moet je vermenigvuldigen bij 50 om tot 2000 te komen?"
     },
     {
       "id": 13,
       "type": "multiple-choice",
-      "question": "Welk getal is deelbaar door 5?",
-      "options": ["11", "14", "20", "23"],
-      "correct": 2
+      "question": "10 x ? = 3400",
+      "options": ["34", "840", "3400", "340"],
+      "correct": 3,
+      "info": "Welk getal moet je vermenigvuldigen bij 10 om tot 3400 te komen?"
     },
     {
       "id": 14,
       "type": "text",
-      "question": "Typ het resultaat van 8 + 9",
-      "answer": "17"
+      "question": "? x 70 = 6300",
+      "answer": "90",
+      "info": "Welk getal moet je vermenigvuldigen bij 70 om tot 6300 te komen?"
     },
     {
       "id": 15,
       "type": "drag-drop",
-      "question": "Sleep het juiste antwoord: 10 − 4",
-      "options": ["6", "5", "7"],
-      "correct": "6"
+      "question": "6 x ? = 6000",
+      "options": ["50", "500", "1000", "150"],
+      "correct": "1000",
+      "info": "Welk getal moet je vermenigvuldigen bij 6 om tot 6000 te komen?"
+    },
+    {
+      "id": 16,
+      "type": "text",
+      "question": "3 x 2504 = ?",
+      "answer": "7512",
+      "info": "Misschien moet je het getal eens splitsen om deze appart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 17,
+      "type": "text",
+      "question": "4170 x 2 = ?",
+      "answer": "8340",
+      "info": "Misschien moet je het getal eens splitsen om deze appart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 18,
+      "type": "text",
+      "question": "5 x 1013 = ?",
+      "answer": "5065",
+      "info": "Misschien moet je het getal eens splitsen om deze appart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 19,
+      "type": "text",
+      "question": "5 x 1608 = ?",
+      "answer": "8040",
+      "info": "Misschien moet je het getal eens splitsen om deze appart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 20,
+      "type": "text",
+      "question": "693 x 7 = ?",
+      "answer": "4851",
+      "info": "Misschien moet je het getal eens splitsen om deze appart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 21,
+      "type": "text",
+      "question": "3304 x 3 = ?",
+      "answer": "9912",
+      "info": "Misschien moet je het getal eens splitsen om deze apart te vermenigvuldigen, noteer ergens de berekening en schrijf het antwoord dan op!"
+    },
+    {
+      "id": 22,
+      "type": "drag-drop",
+      "question": "2 x 250 = ?",
+      "options": ["25", "500", "1000", "255"],
+      "answer": "500",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 23,
+      "type": "drag-drop",
+      "question": "4 x 250 = ?",
+      "options": ["75", "800", "1000", "750"],
+      "answer": "1000",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 24,
+      "type": "drag-drop",
+      "question": "8 x 250 = ?",
+      "options": ["800", "2040", "20000", "2000"],
+      "answer": "2000",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 25,
+      "type": "text",
+      "question": "Welk verband heb je opgemerkt tussen de vorige getallen 500 x ? = 1000, 1000 x ? = 2000",
+      "answer": "2",
+      "info": "Welk getal moet je vermenigvuldigen bij 500 om tot 1000 te komen?"
+    },
+    {
+      "id": 26,
+      "type": "drag-drop",
+      "question": "2 x 505 = ?",
+      "options": ["75", "1500", "1010", "2025"],
+      "answer": "1010",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 27,
+      "type": "drag-drop",
+      "question": "4 x 505 = ?",
+      "options": ["5050", "2040", "200002", "2020"],
+      "answer": "2020",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 28,
+      "type": "drag-drop",
+      "question": "8 x 505 = ?",
+      "options": ["1234", "4040", "5050", "8080"],
+      "answer": "4040",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 29,
+      "type": "drag-drop",
+      "question": "2 x 210 = ?",
+      "options": ["460", "800", "450", "420"],
+      "answer": "420",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 30,
+      "type": "drag-drop",
+      "question": "4 x 210 = ?",
+      "options": ["1080", "840", "650", "280"],
+      "answer": "840",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 31,
+      "type": "drag-drop",
+      "question": "8 x 210 = ?",
+      "options": ["880", "777", "1680", "1540"],
+      "answer": "1680",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 32,
+      "type": "drag-drop",
+      "question": "2 x 140 = ?",
+      "options": ["880", "280", "680", "220"],
+      "answer": "280",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 33,
+      "type": "drag-drop",
+      "question": "4 x 140 = ?",
+      "options": ["610", "820", "560", "1400"],
+      "answer": "560",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 34,
+      "type": "drag-drop",
+      "question": "8 x 140 = ?",
+      "options": ["1000", "1400", "1120", "1220"],
+      "answer": "1120",
+      "info": "Je moet gewoon het getal verdubbelen!"
+    },
+    {
+      "id": 35,
+      "type": "drag-drop",
+      "question": "511 x 4 = ?",
+      "options": ["3022", "2044", "4088", "1280"],
+      "answer": "2044",
+      "info": "Probeer deze zonder mijn assistentie!"
+    },
+    {
+      "id": 36,
+      "type": "drag-drop",
+      "question": "4 x 2020 = ?",
+      "options": ["2040", "4000", "7090", "8080"],
+      "answer": "8080",
+      "info": "Probeer deze zonder mijn assistentie!"
+    },
+    {
+      "id": 37,
+      "type": "drag-drop",
+      "question": "910 x 4 = ?",
+      "options": ["3680", "6720", "3640", "1280"],
+      "answer": "3640",
+      "info": "Probeer deze zonder mijn assistentie!"
+    },
+    {
+      "id": 38,
+      "type": "drag-drop",
+      "question": "1150 x 8 = ?",
+      "options": ["10200", "8620", "9500", "9200"],
+      "answer": "9200",
+      "info": "Probeer deze zonder mijn assistentie!"
+    },
+    {
+      "id": 39,
+      "type": "drag-drop",
+      "question": "8 x 1200 = ?",
+      "options": ["10600", "8200", "9600", "7200"],
+      "answer": "9600",
+      "info": "Probeer deze zonder mijn assistentie!"
+    },
+    {
+      "id": 40,
+      "type": "drag-drop",
+      "question": "325 x 8 = ?",
+      "options": ["4800", "6200", "2600", "9200"],
+      "answer": "2600",
+      "info": "Probeer deze zonder mijn assistentie!"
     }
 ]
 },
@@ -114,11 +321,105 @@
   {
     "id": 1,
     "type": "text",
-    "question": "Typ 2 + 2",
-    "answer": "4"
+    "question": "250 x 2 x 7 = ? (Noteer enkel het antwoord)",
+    "answer": "3500",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 2,
+    "type": "text",
+    "question": "5 x 618 x 2 = ? (Noteer enkel het antwoord)",
+    "answer": "6180",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 3,
+    "type": "text",
+    "question": "14 x 4 x 25 = ? (Noteer enkel het antwoord)",
+    "answer": "1400",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 4,
+    "type": "text",
+    "question": "3 x 40 x 50 = ? (Noteer enkel het antwoord)",
+    "answer": "6000",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 5,
+    "type": "text",
+    "question": "20 x 17 x 5 = ? (Noteer enkel het antwoord)",
+    "answer": "1700",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 6,
+    "type": "text",
+    "question": "9 x 25 x 4 = ? (Noteer enkel het antwoord)",
+    "answer": "900",
+    "info": "Je moet de getallen proberen 1 voor 1 te vermenigvuldigen met elkaar!"
+  },
+  {
+    "id": 7,
+    "type": "text",
+    "question": "4 x 2408 = ?",
+    "answer": "9632",
+    "info": "Misschien moet je eens proberen het grote getal te splitsen?"
+  },
+  {
+    "id": 8,
+    "type": "text",
+    "question": "1125 x 8 = ?",
+    "answer": "9000",
+    "info": "Misschien moet je eens proberen het grote getal te splitsen?"
+  },
+  {
+    "id": 9,
+    "type": "multiple-choice",
+    "question": "7 x 4 x 150 = ?",
+    "options": ["4200", "8200", "7", "6766"],
+    "correct": 1,
+    "info": "Vermenigvuldig de getallen in een bepaalde volgorde om het makkelijker te maken!"
+  },
+  {
+    "id": 10,
+    "type": "text",
+    "question": "8 x 530 = ?",
+    "answer": "4240",
+    "info": "Misschien moet je eens proberen het grote getal te splitsen?"
+  },
+  {
+    "id": 11,
+    "type": "multiple-choice",
+    "question": "2 x 906 x 5 = ?",
+    "options": ["8000", "9060", "4020", "8055"],
+    "correct": 1,
+    "info": "Vermenigvuldig de getallen in een bepaalde volgorde om het makkelijker te maken!"
+  },
+  {
+    "id": 12,
+    "type": "text",
+    "question": "In de fabriek worden elke weekdag 250 basketballen gemaakt. Hoeveel ballen zijn dat op 4 weken tijd? (Noteer enkel antwoord)",
+    "answer": "5000",
+    "info": "Hoeveel weekdagen zijn er in een week? Vermenigvuldig met de 4 weken en de hoeveelheid basketballen die worden gemaakt per weekdag!"
+  },
+  {
+    "id": 13,
+    "type": "text",
+    "question": "De directuur van De speelvogel koopt 3 houten schommels van 872€ per stuk. Hoeveel euro moet hij betalen? (Noteer enkel antwoord)",
+    "answer": "2616",
+    "info": "Hoeveel kost 1 schommel? Vermenigvuldig deze het aantal schommels die in totaal worden gekocht!"
+  },
+  {
+    "id": 14,
+    "type": "text",
+    "question": "Uit de speelgoedfabriek vertrekken 8 vrachtwagens met elk 1250 dozen blokken aan boord. Hoeveel dozen zijn dat in totaal? (Noteer enkel antwoord)",
+    "answer": "10000",
+    "info": "Hoeveel dozen heeft 1 vrachtwagen? Vermenigvuldig deze met het totaal aantal vrachtwagens!"
   }
 ]
 }
-             ]
+]
 }
 
