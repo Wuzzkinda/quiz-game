@@ -1,3 +1,5 @@
+/* ---------- VAL ---------- */
+
 let answersDiv;
 let currentLevel = 0;
 let currentQuestion = 0;
@@ -9,17 +11,19 @@ let answerLocked = false;
 let mistakes = 0;
 let starCount = 0;
 
-const level = quizData.levels[currentLevel];
-const q = level.questions[currentQuestion];
-const quizStartTime = Date.now();
+/* ---------- CONST ---------- */
+
 const answerBox = document.getElementById("answer-box");
 const submitBtn = document.getElementById("submit-btn");
 const messageDiv = document.getElementById("message");
 const progressBar = document.getElementById("progress-bar");
-const characterLeft = document.getElementById("character-left");
 const infoBubble = document.getElementById("info-bubble");
+
+/* ---------- CHARACTERS ---------- */
+
 const characters = {
   left: {
+    container: document.getElementById("character-left"),
     img: document.getElementById("char-left-img"),
     poses: [
       "images/characterA/idle.png",
@@ -27,9 +31,11 @@ const characters = {
       "images/characterA/pose2.png",
       "images/characterA/pose3.png"
     ],
-    idle: "images/characterA/idle.png"
+    idle: "images/characterA/idle.png",
+    celebrate: "images/characterA/pose1.png"
   },
   right: {
+    container: document.getElementById("character-right"),
     img: document.getElementById("char-right-img"),
     poses: [
       "images/characterB/idle.png",
@@ -37,16 +43,6 @@ const characters = {
       "images/characterB/pose2.png",
       "images/characterB/pose3.png"
     ],
-    idle: "images/characterB/idle.png"
-  }
-};
-
-const characterPoses = {
-  left: {
-    idle: "images/characterA/idle.png",
-    celebrate: "images/characterA/pose1.png"
-  },
-  right: {
     idle: "images/characterB/idle.png",
     taunt: "images/characterB/pose3.png"
   }
@@ -54,7 +50,7 @@ const characterPoses = {
 
 /* ---------- LOAD QUIZ ---------- */
 
-fetch("data/sample-quiz.json?v=3")
+fetch("data/sample-quiz.json?v=4")
   .then(res => res.json())
   .then(data => {
     quizData = data;
@@ -64,13 +60,14 @@ fetch("data/sample-quiz.json?v=3")
 /* ---------- QUESTIONS ---------- */
 
 function showQuestion() {
-  const q = quizData.questions[currentQuestion];
-  const infoBubble = document.getElementById("info-bubble");
+  const level = quizData.levels[currentLevel];
+  const q = level.questions[currentQuestion];
+
   questionStartTime = Date.now();
   updateProgress();
 
-  infoBubble.textContent = q.info || "No hint available.";
   document.getElementById("question").textContent = q.question;
+  infoBubble.textContent = q.info || "";
   messageDiv.textContent = "";
 
   answersDiv = document.getElementById("answers");
@@ -84,61 +81,36 @@ function showQuestion() {
   answerLocked = false;
 
   if (q.type === "multiple-choice") renderMultipleChoice(q);
-  if (q.type === "text") renderTextQuestion();
   if (q.type === "drag-drop") renderDragDrop(q);
-
-  if (q.info) {
-  infoBubble.textContent = q.info;
-} else {
-  infoBubble.textContent = "";
-}
+  if (q.type === "text") renderTextQuestion();
 }
 
 /* ---------- RENDERING ---------- */
 
 function renderMultipleChoice(q) {
-  q.options.forEach(opt => {
-    const item = document.createElement("div");
-    item.textContent = opt;
-    item.className = "draggable";
-    item.draggable = true;
-    item.ondragstart = e => e.dataTransfer.setData("text", opt);
-    answersDiv.appendChild(item);
-  });
+  q.options.forEach(opt => createDraggable(opt));
+  setupAnswerBoxDrop();
+}
+
+function renderDragDrop(q) {
+  q.options.forEach(opt => createDraggable(opt));
   setupAnswerBoxDrop();
 }
 
 function renderTextQuestion() {
   answerBox.contentEditable = true;
   answerBox.classList.remove("locked");
-
-  if (!answerBox.textContent || answerBox.textContent === "Sleep of typ hier je antwoord") {
-    answerBox.textContent = "";
-  }
-
+  answerBox.textContent = "";
   answerBox.focus();
-  answerBox.onfocus = () => {
-    if (answerBox.textContent === "Sleep of typ hier je antwoord") {
-      answerBox.textContent = "";
-    }
-  };
-  answerBox.onblur = () => {
-    if (answerBox.textContent.trim() === "") {
-      answerBox.textContent = "Sleep of typ hier je antwoord";
-    }
-  };
 }
 
-function renderDragDrop(q) {
-  q.options.forEach(opt => {
-    const item = document.createElement("div");
-    item.textContent = opt;
-    item.className = "draggable";
-    item.draggable = true;
-    item.ondragstart = e => e.dataTransfer.setData("text", opt);
-    answersDiv.appendChild(item);
-  });
-  setupAnswerBoxDrop();
+function createDraggable(text) {
+  const item = document.createElement("div");
+  item.textContent = text;
+  item.className = "draggable";
+  item.draggable = true;
+  item.ondragstart = e => e.dataTransfer.setData("text", text);
+  answersDiv.appendChild(item);
 }
 
 function setupAnswerBoxDrop() {
@@ -156,10 +128,11 @@ function setupAnswerBoxDrop() {
 submitBtn.onclick = () => {
   if (answerLocked) return;
 
-  const q = quizData.questions[currentQuestion];
-  const answer = q.type === "text"
-    ? answerBox.textContent.trim()
-    : selectedAnswer;
+  const level = quizData.levels[currentLevel];
+  const q = level.questions[currentQuestion];
+
+  const answer =
+    q.type === "text" ? answerBox.textContent.trim() : selectedAnswer;
 
   if (!answer) {
     flash("yellow", "Antwoord op de vraag alsjeblieft");
@@ -167,18 +140,19 @@ submitBtn.onclick = () => {
   }
 
   let correct = false;
+
   if (q.type === "multiple-choice") correct = answer === q.options[q.correct];
-  else if (q.type === "drag-drop") correct = answer === q.correct;
-  else if (q.type === "text") correct = answer === q.answer;
+  if (q.type === "drag-drop") correct = answer === q.correct;
+  if (q.type === "text") correct = answer === q.answer;
 
   if (!correct) {
-  mistakes++;
-  flash("red", "Oei, dat is niet juist, probeer opnieuw");
-  tauntRightCharacter();
-  return;
+    mistakes++;
+    flash("red", "Oei, dat is niet juist");
+    tauntRightCharacter();
+    return;
   }
 
-  // Correct
+  // ✅ Correct
   answerLocked = true;
   answerBox.classList.add("locked");
   flash("green", "Correct!");
@@ -186,6 +160,7 @@ submitBtn.onclick = () => {
   flyStar();
 
   results.push({
+    level: currentLevel,
     questionId: q.id,
     timeSpent: Date.now() - questionStartTime,
     correct: true
@@ -209,14 +184,27 @@ function saveResult() {
 /* ---------- FLOW ---------- */
 
 function nextQuestion() {
-  currentQuestion++;
-
   const level = quizData.levels[currentLevel];
+  currentQuestion++;
 
   if (currentQuestion < level.questions.length) {
     showQuestion();
   } else {
     showLevelResults();
+  }
+}
+
+function startNextLevel() {
+  currentLevel++;
+  currentQuestion = 0;
+
+  document.getElementById("result-container").style.display = "none";
+  document.getElementById("quiz-container").style.display = "block";
+
+  if (currentLevel < quizData.levels.length) {
+    showQuestion();
+  } else {
+    finishQuiz();
   }
 }
 
@@ -233,12 +221,15 @@ function flash(color, text) {
   }, 800);
 }
 
+/* ---------- PROGRESSBAR ---------- */
+
 function updateProgress() {
-  const percent = (currentQuestion / quizData.questions.length) * 100;
+  const level = quizData.levels[currentLevel];
+  const percent = (currentQuestion / level.questions.length) * 100;
   progressBar.style.width = percent + "%";
 }
 
-/* ---------- FINISH ---------- */
+/* ---------- RESULTS ---------- */
 
 function showLevelResults() {
   document.getElementById("quiz-container").style.display = "none";
@@ -248,9 +239,12 @@ function showLevelResults() {
     `⏱ Tijd in level: ${Math.floor((Date.now() - quizStartTime) / 1000)}s`;
 
   document.getElementById("result-stars").textContent =
-    `⭐ Sterren in dit level: ${starCount}`;
+    `⭐ Sterren: ${starCount}`;
 
-  addContinueButton();
+  const btn = document.createElement("button");
+  btn.textContent = "➡️ Volgende level";
+  btn.onclick = startNextLevel;
+  document.getElementById("result-container").appendChild(btn);
 }
 
 function addContinueButton() {
@@ -391,77 +385,53 @@ function updateStarCounter() {
 }
 
 // Show info on hover or click
-characterLeft.addEventListener("mouseenter", () => {
+
+
+character.left.container("mouseenter", () => {
   if (infoBubble.textContent.trim() !== "") {
     infoBubble.classList.add("visible");
   }
 });
 
-characterLeft.addEventListener("mouseleave", () => {
+character.left.container("mouseleave", () => {
   infoBubble.classList.remove("visible");
 });
 
 // Mobile support (tap)
-characterLeft.addEventListener("click", () => {
+character.left.container("click", () => {
   infoBubble.classList.toggle("visible");
 });
 
-function randomPose(character) {
-  const poses = character.poses;
-  const randomIndex = Math.floor(Math.random() * poses.length);
-  character.img.src = poses[randomIndex];
+function randomPose(c) {
+  c.img.src = c.poses[Math.floor(Math.random() * c.poses.length)];
 }
 
-function resetPose(character) {
-  character.img.src = character.idle;
+function resetPose(c) {
+  c.img.src = c.idle;
 }
 
-// LEFT CHARACTER
-characters.left.img.addEventListener("mouseenter", () => {
-  randomPose(characters.left);
-});
+characters.left.img.onmouseenter = () => randomPose(characters.left);
+characters.left.img.onmouseleave = () => resetPose(characters.left);
 
-characters.left.img.addEventListener("mouseleave", () => {
-  resetPose(characters.left);
-});
-
-// RIGHT CHARACTER
-characters.right.img.addEventListener("mouseenter", () => {
-  randomPose(characters.right);
-});
-
-characters.right.img.addEventListener("mouseleave", () => {
-  resetPose(characters.right);
-});
+characters.right.img.onmouseenter = () => randomPose(characters.right);
+characters.right.img.onmouseleave = () => resetPose(characters.right);
 
 function celebrateLeftCharacter() {
-  const char = document.getElementById("character-left");
-  const img = char.querySelector("img");
-
-  // Switch pose
-  img.src = characterPoses.left.celebrate;
-
-  // Animate
-  char.classList.add("celebrate");
-
+  const c = characters.left;
+  c.img.src = c.celebrate;
+  c.container.classList.add("celebrate");
   setTimeout(() => {
-    char.classList.remove("celebrate");
-    img.src = characterPoses.left.idle;
+    c.container.classList.remove("celebrate");
+    c.img.src = c.idle;
   }, 600);
 }
 
 function tauntRightCharacter() {
-  const char = document.getElementById("character-right");
-  const img = char.querySelector("img");
-
-  // Switch pose
-  img.src = characterPoses.right.taunt;
-
-  // Animate
-  char.classList.add("taunt");
-
+  const c = characters.right;
+  c.img.src = c.taunt;
+  c.container.classList.add("taunt");
   setTimeout(() => {
-    char.classList.remove("taunt");
-    img.src = characterPoses.right.idle;
+    c.container.classList.remove("taunt");
+    c.img.src = c.idle;
   }, 600);
 }
