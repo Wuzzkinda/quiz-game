@@ -1,4 +1,5 @@
 let answersDiv;
+let currentLevel = 0;
 let currentQuestion = 0;
 let quizData;
 let questionStartTime;
@@ -8,6 +9,8 @@ let answerLocked = false;
 let mistakes = 0;
 let starCount = 0;
 
+const level = quizData.levels[currentLevel];
+const q = level.questions[currentQuestion];
 const quizStartTime = Date.now();
 const answerBox = document.getElementById("answer-box");
 const submitBtn = document.getElementById("submit-btn");
@@ -207,10 +210,13 @@ function saveResult() {
 
 function nextQuestion() {
   currentQuestion++;
-  if (currentQuestion < quizData.questions.length) {
+
+  const level = quizData.levels[currentLevel];
+
+  if (currentQuestion < level.questions.length) {
     showQuestion();
   } else {
-    finishQuiz();
+    showLevelResults();
   }
 }
 
@@ -234,6 +240,26 @@ function updateProgress() {
 
 /* ---------- FINISH ---------- */
 
+function showLevelResults() {
+  document.getElementById("quiz-container").style.display = "none";
+  document.getElementById("result-container").style.display = "block";
+
+  document.getElementById("result-time").textContent =
+    `⏱ Tijd in level: ${Math.floor((Date.now() - quizStartTime) / 1000)}s`;
+
+  document.getElementById("result-stars").textContent =
+    `⭐ Sterren in dit level: ${starCount}`;
+
+  addContinueButton();
+}
+
+function addContinueButton() {
+  const btn = document.createElement("button");
+  btn.textContent = "➡️ Volgende level";
+  btn.onclick = startNextLevel;
+  document.getElementById("result-container").appendChild(btn);
+}
+
 function finishQuiz() {
   progressBar.style.width = "100%";
 
@@ -255,6 +281,20 @@ console.log("🚀 PAYLOAD", JSON.stringify({
   results
   
 }, null, 2));
+
+function startNextLevel() {
+  currentLevel++;
+  currentQuestion = 0;
+  starCount = 0;
+
+  if (currentLevel < quizData.levels.length) {
+    document.getElementById("result-container").style.display = "none";
+    document.getElementById("quiz-container").style.display = "block";
+    showQuestion();
+  } else {
+    showFinalResults();
+  }
+}
 
   fetch("https://backend-production-3c4a.up.railway.app/api/results", {
   method: "POST",
