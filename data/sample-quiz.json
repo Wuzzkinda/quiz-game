@@ -32,7 +32,7 @@
       "type": "multiple-choice",
       "question": "10 x 953 = ?",
       "options": ["9500", "10953", "9530", "19060"],
-      "correct": 3,
+      "correct": 2,
       "info": "Dit is een makkie, wat moet je toevoegen bij de 953?"
     },
     {
@@ -166,7 +166,7 @@
       "type": "drag-drop",
       "question": "2 x 250 = ?",
       "options": ["25", "500", "1000", "255"],
-      "answer": "500",
+      "correct": "500",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -174,7 +174,7 @@
       "type": "drag-drop",
       "question": "4 x 250 = ?",
       "options": ["75", "800", "1000", "750"],
-      "answer": "1000",
+      "correct": "1000",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -182,7 +182,7 @@
       "type": "drag-drop",
       "question": "8 x 250 = ?",
       "options": ["800", "2040", "20000", "2000"],
-      "answer": "2000",
+      "correct": "2000",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -197,7 +197,7 @@
       "type": "drag-drop",
       "question": "2 x 505 = ?",
       "options": ["75", "1500", "1010", "2025"],
-      "answer": "1010",
+      "correct": "1010",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -205,7 +205,7 @@
       "type": "drag-drop",
       "question": "4 x 505 = ?",
       "options": ["5050", "2040", "200002", "2020"],
-      "answer": "2020",
+      "correct": "2020",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -213,7 +213,7 @@
       "type": "drag-drop",
       "question": "8 x 505 = ?",
       "options": ["1234", "4040", "5050", "8080"],
-      "answer": "4040",
+      "correct": "4040",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -221,7 +221,7 @@
       "type": "drag-drop",
       "question": "2 x 210 = ?",
       "options": ["460", "800", "450", "420"],
-      "answer": "420",
+      "correct": "420",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -229,7 +229,7 @@
       "type": "drag-drop",
       "question": "4 x 210 = ?",
       "options": ["1080", "840", "650", "280"],
-      "answer": "840",
+      "correct": "840",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -237,7 +237,7 @@
       "type": "drag-drop",
       "question": "8 x 210 = ?",
       "options": ["880", "777", "1680", "1540"],
-      "answer": "1680",
+      "correct": "1680",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -245,7 +245,7 @@
       "type": "drag-drop",
       "question": "2 x 140 = ?",
       "options": ["880", "280", "680", "220"],
-      "answer": "280",
+      "correct": "280",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -253,7 +253,7 @@
       "type": "drag-drop",
       "question": "4 x 140 = ?",
       "options": ["610", "820", "560", "1400"],
-      "answer": "560",
+      "correct": "560",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -261,7 +261,7 @@
       "type": "drag-drop",
       "question": "8 x 140 = ?",
       "options": ["1000", "1400", "1120", "1220"],
-      "answer": "1120",
+      "correct": "1120",
       "info": "Je moet gewoon het getal verdubbelen!"
     },
     {
@@ -269,7 +269,7 @@
       "type": "drag-drop",
       "question": "511 x 4 = ?",
       "options": ["3022", "2044", "4088", "1280"],
-      "answer": "2044",
+      "correct": "2044",
       "info": "Probeer deze zonder mijn assistentie!"
     },
     {
@@ -277,7 +277,7 @@
       "type": "drag-drop",
       "question": "4 x 2020 = ?",
       "options": ["2040", "4000", "7090", "8080"],
-      "answer": "8080",
+      "correct": "8080",
       "info": "Probeer deze zonder mijn assistentie!"
     },
     {
@@ -285,7 +285,7 @@
       "type": "drag-drop",
       "question": "910 x 4 = ?",
       "options": ["3680", "6720", "3640", "1280"],
-      "answer": "3640",
+      "correct": "3640",
       "info": "Probeer deze zonder mijn assistentie!"
     },
     {
@@ -293,7 +293,7 @@
       "type": "drag-drop",
       "question": "1150 x 8 = ?",
       "options": ["10200", "8620", "9500", "9200"],
-      "answer": "9200",
+      "correct": "9200",
       "info": "Probeer deze zonder mijn assistentie!"
     },
     {
@@ -301,7 +301,7 @@
       "type": "drag-drop",
       "question": "8 x 1200 = ?",
       "options": ["10600", "8200", "9600", "7200"],
-      "answer": "9600",
+      "correct": "9600",
       "info": "Probeer deze zonder mijn assistentie!"
     },
     {
@@ -309,7 +309,7 @@
       "type": "drag-drop",
       "question": "325 x 8 = ?",
       "options": ["4800", "6200", "2600", "9200"],
-      "answer": "2600",
+      "correct": "2600",
       "info": "Probeer deze zonder mijn assistentie!"
     }
 ]
