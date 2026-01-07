@@ -408,6 +408,7 @@ function sendResults(reason = "level-complete"){
     reason,
     level: currentLevel,
     totalTime: Date.now() - quizStartTime,
+    mistakes,
     results
   };
 
