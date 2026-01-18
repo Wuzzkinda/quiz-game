@@ -157,7 +157,6 @@ submitBtn.onclick = () => {
     return;
   }
 
-  // ✅ Correct
   answerLocked = true;
   answerBox.classList.add("locked");
   flash("green", "Correct!");
@@ -324,10 +323,8 @@ function addStarToBucket() {
     bucket.classList.add("expanded");
   }
 
-  // Clear stars (visual only)
   bucket.querySelectorAll(".star").forEach(s => s.remove());
 
-  // Render max 6 visible stars
   const visibleStars = Math.min(starCount, 6);
 
   for (let i = 0; i < visibleStars; i++) {

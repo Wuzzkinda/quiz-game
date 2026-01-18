@@ -3,10 +3,10 @@ body {
   text-align: center;
 
   background-image: url("images/backgrounds/main.png");
-  background-size: cover;        /* fill screen */
-  background-position: center;   /* center image */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;  /* prevents jump when content changes */
+  background-attachment: fixed;
 
   min-height: 100vh;
 }
@@ -94,7 +94,6 @@ button {
   font-size: 18px;
 }
 
-/* Feedback colors */
 .answer-box.yellow {
   background-color: #fff3cd;
 }
@@ -144,14 +143,13 @@ button {
   pointer-events: none;
 }
 
-/* ✅ FIXED, STABLE BUCKET */
 #star-bucket {
   position: absolute;
   bottom: 10px;
   left: 10px;
 
   width: 100px;
-  height: 40px;              /* default (0–3 stars) */
+  height: 40px;              
 
   display: flex;
   flex-wrap: wrap;
@@ -162,10 +160,10 @@ button {
 }
 
 #star-bucket.expanded {
-  height: 80px;              /* 4+ stars */
+  height: 80px;         
 }
 
-/* Stars inside bucket */
+
 #star-bucket .star {
   width: 24px;
   height: 24px;
@@ -283,7 +281,6 @@ button {
   pointer-events: none;
 }
 
-/* Show bubble when hovering icon */
 #info-container:hover #info-bubble {
   opacity: 1;
   transform: translateY(0);
